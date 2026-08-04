@@ -23,7 +23,18 @@
   var WEB3FORMS_KEY = 'YOUR_WEB3FORMS_ACCESS_KEY';
   var OFFICE_EMAIL = 'pauline11246@yahoo.com';
   var OFFICE_PHONE = '7133844384';
-  var OFFICE_SMS_GATEWAY = ''; // optional, e.g. 7133844384@vtext.com (carrier email-to-SMS)
+  // Fully-automatic text to the office. A static page can't send SMS directly, so the
+  // booking email is ALSO CC'd to the number's carrier email-to-SMS gateway, which turns
+  // it into a text. Carrier unknown, so this is a CATCH-ALL across the major US carriers —
+  // only the one that actually owns 713-384-4384 delivers; the rest quietly drop.
+  // (Once you confirm the real carrier, trim this to just that one line to avoid stray bounces.)
+  // NOTE: this only fires once WEB3FORMS_KEY is set — the text rides on the booking email.
+  var OFFICE_SMS_GATEWAY = [
+    '7133844384@vtext.com',              // Verizon
+    '7133844384@txt.att.net',            // AT&T
+    '7133844384@tmomail.net',            // T-Mobile
+    '7133844384@messaging.sprintpcs.com' // Sprint / legacy T-Mobile
+  ];
 
   var LIVE = !!(SUPABASE_URL && SUPABASE_ANON_KEY);
 
@@ -79,7 +90,8 @@
   function notify(subject, fields) {
     if (!WEB3FORMS_KEY || WEB3FORMS_KEY.indexOf('YOUR_') === 0) return Promise.resolve(false);
     var body = Object.assign({ access_key: WEB3FORMS_KEY, subject: subject, from_name: 'Restomind Website' }, fields);
-    if (OFFICE_SMS_GATEWAY) body.ccemail = OFFICE_SMS_GATEWAY;
+    var gw = Array.isArray(OFFICE_SMS_GATEWAY) ? OFFICE_SMS_GATEWAY.join(',') : OFFICE_SMS_GATEWAY;
+    if (gw) body.ccemail = gw;
     return fetch('https://api.web3forms.com/submit', { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(body) })
       .then(function (r) { return r.json(); }).then(function (j) { return !!j.success; }).catch(function () { return false; });
   }
