@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin | Restomind Behavioral Health</title>
+<meta name="robots" content="noindex, nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Mulish:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--blue:#1a6dff;--blue-deep:#1550c8;--navy:#0f2350;--gold:#e0a82e;--gold-deep:#c48f1c;--gold-soft:#fbf1d6;--bg:#f4f8ff;--white:#fff;--ink:#14213d;--slate:#4a5878;--muted:#8a95af;--line:#e2e9f6;--disp:'Poppins',sans-serif;--sans:'Mulish',-apple-system,Segoe UI,Arial,sans-serif;--ok:#1a7f43;--ok-soft:#e7f6ec}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.55}
+  h1,h2,h3,.disp{font-family:var(--disp)}
+  .top{background:var(--navy);color:#fff}
+  .top .wrap{max-width:1160px;margin:0 auto;padding:0 22px;display:flex;align-items:center;justify-content:space-between;height:64px}
+  .top .brand{font-family:var(--disp);font-weight:800;font-size:19px}.top .brand span{color:var(--gold)}.top .brand small{display:block;font-family:var(--sans);font-size:10px;letter-spacing:.18em;color:#a9c0f0;font-weight:700}
+  .top a.link{color:#cfe0ff;font-size:13.5px;font-weight:700;margin-left:16px}.top a.link:hover{color:#fff}
+  .modebar{font-size:12.5px;text-align:center;padding:7px;font-weight:700}
+  .tabs{max-width:1160px;margin:22px auto 0;padding:0 22px;display:flex;gap:8px;flex-wrap:wrap}
+  .tab{background:#fff;border:1px solid var(--line);color:var(--slate);font-weight:800;font-size:14px;padding:11px 20px;border-radius:30px;cursor:pointer;font-family:var(--sans)}
+  .tab.on{background:var(--blue);color:#fff;border-color:var(--blue)}
+  main{max-width:1160px;margin:20px auto 60px;padding:0 22px}
+  .panel{display:none}.panel.on{display:block}
+  .card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px;margin-bottom:18px}
+  .card h2{font-family:var(--disp);font-size:20px;color:var(--navy);font-weight:800;margin-bottom:4px}
+  .card .sub{font-size:13px;color:var(--muted);margin-bottom:16px}
+  .fgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:640px){.fgrid{grid-template-columns:1fr}}
+  .fld label{display:block;font-size:12px;font-weight:800;color:var(--ink);margin-bottom:5px}
+  .fld input,.fld textarea,.fld select{width:100%;font-family:var(--sans);font-size:13.5px;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:10px;padding:10px 12px}
+  .fld input:focus,.fld textarea:focus,.fld select:focus{outline:none;border-color:var(--blue);background:#fff;box-shadow:0 0 0 3px rgba(26,109,255,.12)}
+  .fld textarea{resize:vertical}.full{grid-column:1/-1}
+  .btn{border:none;border-radius:30px;font-weight:800;font-size:13px;padding:10px 18px;cursor:pointer;font-family:var(--sans)}
+  .btn-blue{background:var(--blue);color:#fff}.btn-gold{background:var(--gold);color:#3a2c05}.btn-ghost{background:#fff;border:1.5px solid var(--line);color:var(--slate)}
+  .btn-x{background:none;color:#c0392b;font-weight:800;cursor:pointer;border:none;font-size:12.5px}
+  .row-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:12px}
+  .postrow{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+  .postrow .q{font-weight:800;color:var(--navy);font-size:15px}
+  .postrow .meta{font-size:12px;color:var(--muted)}
+  .badge{font-size:10px;font-weight:800;padding:3px 9px;border-radius:12px}.b-pub{background:var(--ok-soft);color:var(--ok)}.b-draft{background:#eef1f7;color:#889}
+  table{width:100%;border-collapse:collapse;font-size:13.5px}
+  th{text-align:left;background:var(--navy);color:#fff;font-size:11px;letter-spacing:.5px;text-transform:uppercase;padding:10px 12px;font-weight:700}
+  th:first-child{border-radius:8px 0 0 8px}th:last-child{border-radius:0 8px 8px 0}
+  td{padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  .pill{display:inline-block;font-size:10.5px;font-weight:800;padding:3px 9px;border-radius:20px}.p-ok{background:var(--ok-soft);color:var(--ok)}.p-hid{background:#eee;color:#777}
+  /* kit */
+  .kitgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}@media(max-width:760px){.kitgrid{grid-template-columns:1fr}}
+  .kitcard{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;position:relative}
+  .kitcard .type{position:absolute;top:14px;right:14px;font-size:10px;font-weight:800;text-transform:uppercase;padding:3px 9px;border-radius:12px}
+  .type.blue{background:#e7f0ff;color:var(--blue)}.type.gold{background:var(--gold-soft);color:var(--gold-deep)}
+  .kitcard h3{font-family:var(--disp);font-size:15px;color:var(--navy);margin-bottom:10px;font-weight:800}
+  .kitcard .kfld{margin-bottom:8px}.kitcard .kfld label{font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.03em;color:var(--muted);display:block;margin-bottom:3px}
+  .kitcard input,.kitcard textarea,.kitcard select{width:100%;font-family:var(--sans);font-size:13px;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:8px;padding:8px 10px}
+  .kitcard input:focus,.kitcard textarea:focus,.kitcard select:focus{outline:none;border-color:var(--blue);background:#fff}
+  /* gate + modal + toast */
+  .gate{position:fixed;inset:0;background:linear-gradient(160deg,var(--blue),var(--blue-deep));display:flex;align-items:center;justify-content:center;z-index:200}
+  .gate .box{background:#fff;border-radius:20px;padding:34px;width:340px;text-align:center;box-shadow:0 30px 70px rgba(0,0,0,.3)}
+  .gate h1{font-family:var(--disp);color:var(--navy);font-size:22px;margin-bottom:6px}.gate p{font-size:13px;color:var(--muted);margin-bottom:16px}
+  .gate input{width:100%;text-align:center;font-size:16px;padding:12px;margin-bottom:12px;border:1.5px solid var(--line);border-radius:10px}
+  .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(120px);background:var(--navy);color:#fff;padding:12px 22px;border-radius:30px;font-weight:700;font-size:14px;transition:transform .3s;z-index:150}.toast.on{transform:translateX(-50%) translateY(0)}
+  .viewer{position:fixed;inset:0;background:rgba(15,35,80,.6);display:none;align-items:center;justify-content:center;z-index:120;padding:20px}.viewer.on{display:flex}
+  /* printable flyer */
+  .flyer{width:min(460px,94vw);border-radius:18px;overflow:hidden;background:#fff;position:relative}
+  .viewer .close{position:absolute;top:12px;right:14px;background:rgba(255,255,255,.9);border:none;width:34px;height:34px;border-radius:50%;font-size:18px;cursor:pointer;z-index:3}
+  .fl-top{padding:40px 34px;color:#fff;position:relative;overflow:hidden}
+  .fl-top.blue{background:radial-gradient(ellipse 90% 120% at 80% -10%,#3b86ff,#1550c8)}
+  .fl-top.gold{background:radial-gradient(ellipse 90% 120% at 80% -10%,#f0c04a,#c48f1c)}
+  .fl-brand{font-family:var(--disp);font-size:20px;font-weight:800}.fl-brand small{display:block;font-size:9px;letter-spacing:.24em;opacity:.85}
+  .fl-tag{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;background:rgba(255,255,255,.2);padding:5px 12px;border-radius:20px;margin:22px 0 12px}
+  .fl-hl{font-family:var(--disp);font-size:30px;font-weight:800;line-height:1.1;margin-bottom:10px}
+  .fl-sub{font-size:15px;opacity:.94;line-height:1.5}
+  .fl-body{padding:24px 34px 30px}
+  .fl-cta{background:var(--gold-soft);border:1px solid var(--gold);border-radius:12px;padding:14px;text-align:center}
+  .fl-cta b{color:var(--gold-deep);font-family:var(--disp)}.fl-cta .ph{color:var(--navy);font-weight:800;margin-top:4px}
+  @media print{body *{visibility:hidden}.flyer,.flyer *{visibility:visible}.flyer{position:absolute;inset:0;width:100%;border-radius:0}.viewer{background:#fff;position:static}.viewer .close{display:none}}
+</style>
+</head>
+<body>
+<div class="gate" id="gate"><div class="box"><h1>Restomind Admin</h1><p>Behavioral Health</p><input type="password" id="pass" placeholder="Enter passcode" onkeydown="if(event.key==='Enter')unlock()"><button class="btn btn-blue" style="width:100%" onclick="unlock()">Enter</button><p style="margin-top:14px;font-size:11px">Demo passcode: <b>restomind2026</b></p></div></div>
+
+<div class="top"><div class="wrap">
+  <div class="brand">Resto<span>mind</span> — Admin<small>Behavioral Health</small></div>
+  <div><a class="link" href="index.html" target="_blank">View Site ↗</a><a class="link" href="blog.html" target="_blank">Blog ↗</a><a class="link" href="#" onclick="lock();return false;">Lock</a></div>
+</div></div>
+<div class="modebar" id="modebar"></div>
+
+<div class="tabs">
+  <button class="tab on" data-t="blog">✍️ Blog Topics</button>
+  <button class="tab" data-t="comments">💬 Comments</button>
+  <button class="tab" data-t="kit">📢 Marketing Kit</button>
+</div>
+
+<main>
+  <!-- BLOG -->
+  <section class="panel on" id="p-blog">
+    <div class="card">
+      <h2 id="blogFormTitle">Add a Blog Topic</h2>
+      <div class="sub">Publish a new topic or edit an existing one. Changes appear on the public blog instantly.</div>
+      <form id="blogForm">
+        <input type="hidden" id="bId">
+        <div class="fgrid">
+          <div class="fld full"><label>Title / Question</label><input id="bQuestion" required placeholder="e.g. Anxiety or Everyday Stress? How to Tell the Difference"></div>
+          <div class="fld"><label>Category</label><input id="bCategory" placeholder="e.g. Anxiety"></div>
+          <div class="fld"><label>Slug (link)</label><input id="bSlug" placeholder="auto from title"></div>
+          <div class="fld full"><label>Excerpt (card summary)</label><textarea id="bExcerpt" placeholder="1–2 sentence teaser"></textarea></div>
+          <div class="fld full"><label>Body</label><textarea id="bBody" style="min-height:150px" placeholder="Full article. Separate paragraphs with a blank line."></textarea></div>
+          <div class="fld full"><label style="display:flex;gap:8px;align-items:center;font-weight:600"><input type="checkbox" id="bPublished" checked style="width:auto"> Published (visible on the site)</label></div>
+        </div>
+        <div class="row-actions"><button type="submit" class="btn btn-blue">Save Topic</button><button type="button" class="btn btn-ghost" onclick="resetBlogForm()">Clear</button></div>
+      </form>
+    </div>
+    <div class="card"><h2>Existing Topics</h2><div class="sub" id="postCount"></div><div id="postList"></div></div>
+  </section>
+
+  <!-- COMMENTS -->
+  <section class="panel" id="p-comments">
+    <div class="card"><h2>Comment Moderation</h2><div class="sub">Approve, hide, or remove comments. Approved comments show publicly on the blog.</div>
+      <div style="overflow-x:auto"><table id="cmtTable"><thead><tr><th>Name</th><th>Comment</th><th>Topic</th><th>When</th><th>Status</th><th></th></tr></thead><tbody></tbody></table></div>
+      <p class="sub" id="cmtEmpty" style="display:none;padding:16px 0">No comments yet.</p>
+    </div>
+  </section>
+
+  <!-- KIT -->
+  <section class="panel" id="p-kit">
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+        <div><h2>Marketing Kit — Flyers</h2><div class="sub">Edit any flyer's text and save. Open a flyer to print or save it as a PDF to share.</div></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-ghost" onclick="resetKit()">Reset to defaults</button><button class="btn btn-blue" onclick="saveAllKit()">Save all</button></div>
+      </div>
+      <div class="kitgrid" id="kitGrid" style="margin-top:16px"></div>
+    </div>
+  </section>
+</main>
+
+<div class="viewer" id="viewer"><div class="flyer" id="flyerBox"><button class="close" onclick="closeViewer()">✕</button><div id="flyerInner"></div>
+  <div style="padding:14px 34px 20px;background:#fff;display:flex;gap:8px;justify-content:center"><button class="btn btn-gold" onclick="window.print()">🖨️ Print / Save PDF</button><button class="btn btn-ghost" onclick="closeViewer()">Close</button></div>
+</div></div>
+<div class="toast" id="toast"></div>
+
+<script src="data.js"></script>
+<script>
+  var PASSCODE='restomind2026';
+  var $=function(id){return document.getElementById(id);};
+  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(m){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m];});}
+  function when(iso){try{return new Date(iso).toLocaleString(undefined,{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'});}catch(e){return '';}}
+  function slugify(s){return RMBH.slugify(s);}
+  function toast(m){var t=$('toast');t.textContent=m;t.classList.add('on');setTimeout(function(){t.classList.remove('on');},2400);}
+
+  if(sessionStorage.getItem('rmbh_admin')==='1'){$('gate').style.display='none';boot();}
+  function unlock(){if($('pass').value===PASSCODE){sessionStorage.setItem('rmbh_admin','1');$('gate').style.display='none';boot();}else toast('Incorrect passcode');}
+  function lock(){sessionStorage.removeItem('rmbh_admin');location.reload();}
+
+  document.querySelectorAll('.tab').forEach(function(t){t.onclick=function(){
+    document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('on');});t.classList.add('on');
+    document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('on');});
+    $('p-'+t.getAttribute('data-t')).classList.add('on');
+  };});
+
+  function boot(){
+    $('modebar').innerHTML = RMBH.live ? '🟢 Live (Supabase) — changes shared across all visitors' : '🟡 Demo — changes save in this browser. Add Supabase keys in data.js to go live.';
+    $('modebar').style.cssText += RMBH.live ? 'background:#e7f6ec;color:#1a7f43' : 'background:#fbf1d6;color:#9a6a12';
+    loadPosts(); loadComments(); loadKit();
+  }
+
+  /* ---- Blog ---- */
+  function loadPosts(){
+    RMBH.getPosts().then(function(posts){
+      $('postCount').textContent=posts.length+' topic(s)';
+      $('postList').innerHTML=posts.map(function(p){
+        return '<div class="postrow"><div><div class="q">'+esc(p.question)+'</div><div class="meta">'+esc(p.category||'—')+' · /'+esc(p.slug)+' · '+(p.published?'<span class="badge b-pub">Published</span>':'<span class="badge b-draft">Draft</span>')+'</div></div>'+
+          '<div class="row-actions" style="margin:0"><button class="btn btn-ghost" style="padding:7px 13px" onclick="editPost(\''+p.id+'\')">Edit</button><button class="btn btn-ghost" style="padding:7px 13px" onclick="togglePub(\''+p.id+'\','+(p.published?'false':'true')+')">'+(p.published?'Unpublish':'Publish')+'</button><button class="btn-x" onclick="delPost(\''+p.id+'\')">Delete</button></div></div>';
+      }).join('');
+    });
+  }
+  window.editPost=function(id){RMBH.getPosts().then(function(posts){var p=posts.filter(function(x){return x.id===id;})[0];if(!p)return;
+    $('blogFormTitle').textContent='Edit Blog Topic';$('bId').value=p.id;$('bQuestion').value=p.question;$('bCategory').value=p.category||'';$('bSlug').value=p.slug;$('bExcerpt').value=p.excerpt||'';$('bBody').value=p.body||'';$('bPublished').checked=!!p.published;window.scrollTo(0,0);});};
+  window.togglePub=function(id,pub){RMBH.getPosts().then(function(posts){var p=posts.filter(function(x){return x.id===id;})[0];if(!p)return;RMBH.savePost({id:id,slug:p.slug,question:p.question,category:p.category,excerpt:p.excerpt,body:p.body,published:pub}).then(function(){loadPosts();toast(pub?'Published':'Unpublished');});});};
+  window.delPost=function(id){if(confirm('Delete this blog topic?'))RMBH.deletePost(id).then(function(){loadPosts();toast('Deleted');});};
+  window.resetBlogForm=function(){$('blogForm').reset();$('bId').value='';$('bPublished').checked=true;$('blogFormTitle').textContent='Add a Blog Topic';};
+  $('blogForm').addEventListener('submit',function(e){e.preventDefault();
+    var post={question:$('bQuestion').value.trim(),category:$('bCategory').value.trim()||'Wellness',slug:($('bSlug').value.trim()||slugify($('bQuestion').value)),excerpt:$('bExcerpt').value.trim(),body:$('bBody').value.trim(),published:$('bPublished').checked};
+    if($('bId').value)post.id=$('bId').value;
+    RMBH.savePost(post).then(function(){resetBlogForm();loadPosts();toast('Topic saved ✓');});
+  });
+
+  /* ---- Comments ---- */
+  function loadComments(){
+    RMBH.getAllComments().then(function(list){
+      var tb=$('cmtTable').querySelector('tbody');$('cmtEmpty').style.display=list.length?'none':'block';$('cmtTable').style.display=list.length?'':'none';
+      tb.innerHTML=list.map(function(c){var st=c.status||'approved';
+        return '<tr><td><b>'+esc(c.name)+'</b></td><td>'+esc(c.body)+'</td><td style="color:#889;font-size:12px">'+esc(c.post_slug)+'</td><td style="color:#889;font-size:12px">'+when(c.created_at)+'</td><td><span class="pill '+(st==='approved'?'p-ok':'p-hid')+'">'+st+'</span></td>'+
+          '<td class="row-actions" style="margin:0">'+(st==='approved'?'<button class="btn btn-ghost" style="padding:6px 11px" onclick="cmt(\''+c.id+'\',\'hidden\')">Hide</button>':'<button class="btn btn-blue" style="padding:6px 11px" onclick="cmt(\''+c.id+'\',\'approved\')">Approve</button>')+'<button class="btn-x" onclick="delCmt(\''+c.id+'\')">Delete</button></td></tr>';
+      }).join('');
+    });
+  }
+  window.cmt=function(id,s){RMBH.setCommentStatus(id,s).then(function(){loadComments();toast('Updated');});};
+  window.delCmt=function(id){if(confirm('Delete this comment?'))RMBH.deleteComment(id).then(function(){loadComments();toast('Deleted');});};
+
+  /* ---- Kit ---- */
+  var KIT=[];
+  function loadKit(){RMBH.getKit().then(function(kit){KIT=kit;
+    $('kitGrid').innerHTML=kit.map(function(k,i){
+      return '<div class="kitcard"><span class="type '+k.theme+'">'+k.theme+'</span><h3>📄 '+esc(k.title)+'</h3>'+
+        kf(i,'title','Title')+kf(i,'tag','Tag / label')+kf(i,'headline','Headline',1)+kf(i,'sub','Sub-text',1)+
+        '<div class="kfld"><label>Theme</label><select data-i="'+i+'" data-f="theme"><option value="blue"'+(k.theme==='blue'?' selected':'')+'>Blue</option><option value="gold"'+(k.theme==='gold'?' selected':'')+'>Gold</option></select></div>'+
+        '<div class="row-actions"><button class="btn btn-blue" onclick="saveOne('+i+')">Save</button><button class="btn btn-gold" onclick="openFlyer('+i+')">Open / Print</button></div></div>';
+    }).join('');
+  });}
+  function kf(i,f,label,area){var v=esc(KIT[i][f]);return '<div class="kfld"><label>'+label+'</label>'+(area?'<textarea data-i="'+i+'" data-f="'+f+'">'+v+'</textarea>':'<input data-i="'+i+'" data-f="'+f+'" value="'+v+'">')+'</div>';}
+  function collect(){document.querySelectorAll('#kitGrid [data-i]').forEach(function(el){KIT[+el.getAttribute('data-i')][el.getAttribute('data-f')]=el.value;});}
+  window.saveOne=function(i){collect();RMBH.saveKit(KIT).then(function(){toast('Saved “'+KIT[i].title+'” ✓');loadKit();});};
+  window.saveAllKit=function(){collect();RMBH.saveKit(KIT).then(function(){toast('All flyers saved ✓');});};
+  window.resetKit=function(){if(confirm('Reset all flyers to defaults?'))RMBH.resetKit().then(function(){loadKit();toast('Reset');});};
+  window.openFlyer=function(i){collect();var k=KIT[i];
+    $('flyerInner').innerHTML='<div class="fl-top '+k.theme+'"><div class="fl-brand">Restomind<small>BEHAVIORAL HEALTH</small></div><span class="fl-tag">'+esc(k.tag)+'</span><div class="fl-hl">'+esc(k.headline)+'</div><div class="fl-sub">'+esc(k.sub)+'</div></div>'+
+      '<div class="fl-body"><div style="font-size:14px;color:#4a5878;margin-bottom:14px"><b style="color:#0f2350">'+esc(k.title)+'</b></div><div class="fl-cta"><b>Book your appointment today</b><div class="ph">📞 713-384-4384 · pauline11246@yahoo.com</div><div style="font-size:12px;color:#8a95af;margin-top:4px">restomindbehavioralhealth.com · Houston, TX &amp; Telehealth</div></div></div>';
+    $('viewer').classList.add('on');
+  };
+  window.closeViewer=function(){$('viewer').classList.remove('on');};
+  $('viewer').addEventListener('click',function(e){if(e.target===$('viewer'))closeViewer();});
+</script>
+</body>
+</html>

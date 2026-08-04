@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog | Restomind Behavioral Health</title>
+<meta name="description" content="Helpful, compassionate reads on anxiety, depression, medication, telehealth and behavioral health from Restomind Behavioral Health.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Restomind Behavioral Health — Blog">
+<meta property="og:description" content="Compassionate, helpful reads on mental health and behavioral care.">
+<meta property="og:image" content="https://nubridgemd1.github.io/restomind-mock/assets/og-banner.png">
+<meta name="theme-color" content="#1a6dff">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Mulish:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--blue:#1a6dff;--blue-deep:#1550c8;--navy:#0f2350;--gold:#e0a82e;--gold-deep:#c48f1c;--gold-soft:#fbf1d6;--bg:#f4f8ff;--white:#fff;--ink:#14213d;--slate:#4a5878;--muted:#8a95af;--line:#e2e9f6;--disp:'Poppins',sans-serif;--sans:'Mulish',-apple-system,Segoe UI,Arial,sans-serif;--shadow:0 20px 55px rgba(21,80,200,.12)}
+  *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+  body{font-family:var(--sans);color:var(--ink);background:var(--white);line-height:1.7}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  h1,h2,h3,.disp{font-family:var(--disp)}
+  .eyebrow{font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:800;color:var(--blue)}
+  .btn{display:inline-flex;align-items:center;gap:8px;font-weight:800;font-size:14.5px;border-radius:40px;padding:12px 22px;cursor:pointer;border:none;font-family:var(--sans)}
+  .btn-blue{background:linear-gradient(135deg,var(--blue),var(--blue-deep));color:#fff}
+  header{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.93);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .brand{display:flex;align-items:center;gap:11px}
+  .mark{width:42px;height:42px}
+  .bname{font-family:var(--disp);font-size:20px;font-weight:800;color:var(--navy);line-height:1}
+  .bname span{color:var(--blue)}.bname small{display:block;font-family:var(--sans);font-size:9px;letter-spacing:.24em;color:var(--gold-deep);font-weight:800;margin-top:3px}
+  .navlinks{display:flex;gap:22px;align-items:center}.navlinks a{font-size:14.5px;font-weight:700;color:var(--slate)}.navlinks a:hover{color:var(--blue)}
+  @media(max-width:640px){.navlinks a:not(.btn){display:none}}
+  .hero{background:radial-gradient(ellipse 70% 90% at 82% -10%,#e7f0ff,transparent 60%),linear-gradient(180deg,#fbfdff,var(--bg));padding:52px 0}
+  .hero h1{font-family:var(--disp);font-size:clamp(30px,4.6vw,44px);color:var(--navy);font-weight:800;line-height:1.08;max-width:17ch;letter-spacing:-.02em}
+  .hero p{color:var(--slate);font-size:18px;margin-top:14px;max-width:52ch}
+  section{padding:52px 0}
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+  @media(max-width:720px){.grid{grid-template-columns:1fr}}
+  .post-card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:26px;box-shadow:0 8px 24px rgba(21,80,200,.05);transition:transform .18s,box-shadow .18s;display:flex;flex-direction:column}
+  .post-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+  .cat{align-self:flex-start;font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--gold-deep);background:var(--gold-soft);padding:5px 12px;border-radius:20px;margin-bottom:14px}
+  .post-card h3{font-family:var(--disp);font-size:21px;color:var(--navy);font-weight:800;line-height:1.2}
+  .post-card p{color:var(--slate);font-size:14.5px;margin-top:10px;flex:1}
+  .post-card .foot{display:flex;align-items:center;justify-content:space-between;margin-top:18px}
+  .readlink{color:var(--blue);font-weight:800;font-size:14px}
+  .cbadge{font-size:12px;color:var(--muted)}
+  /* single post */
+  #postView{display:none}
+  .back{display:inline-flex;align-items:center;gap:7px;color:var(--blue);font-weight:800;font-size:14px;margin-bottom:20px}
+  .article{max-width:760px;margin:0 auto}
+  .article h1{font-family:var(--disp);font-size:clamp(28px,4vw,40px);color:var(--navy);line-height:1.14;margin:10px 0 14px;font-weight:800;letter-spacing:-.02em}
+  .article .body{font-size:18px;color:var(--slate);line-height:1.8}
+  .article .body p{margin-bottom:14px}
+  .sharebar{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin:22px 0;padding:14px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .sharebar .sl{font-size:13px;font-weight:800;color:var(--navy);margin-right:2px}
+  .sb{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:13px;border:1.5px solid var(--line);background:#fff;color:var(--ink);border-radius:30px;padding:8px 14px;cursor:pointer;font-family:inherit}
+  .sb:hover{border-color:var(--blue);color:var(--blue)}
+  .sb.native{background:var(--blue);color:#fff;border-color:var(--blue)}
+  /* comments */
+  .comments{max-width:760px;margin:34px auto 0}
+  .comments h2{font-family:var(--disp);font-size:25px;color:var(--navy);font-weight:800}
+  .live-dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--blue);box-shadow:0 0 0 4px #e7f0ff;margin-left:8px;vertical-align:middle}
+  .cform{background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:20px;margin:16px 0 26px}
+  .cform input,.cform textarea{width:100%;font-family:var(--sans);font-size:14.5px;color:var(--ink);background:#fff;border:1.5px solid var(--line);border-radius:11px;padding:12px 14px;margin-bottom:10px}
+  .cform input:focus,.cform textarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 4px rgba(26,109,255,.12)}
+  .cform textarea{resize:vertical;min-height:80px}
+  .clist{display:flex;flex-direction:column;gap:14px}
+  .comment{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+  .comment .ch{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+  .avatar{width:34px;height:34px;border-radius:50%;background:#e7f0ff;color:var(--blue);font-weight:800;display:flex;align-items:center;justify-content:center;font-size:14px}
+  .comment .nm{font-weight:800;color:var(--navy);font-size:14.5px}.comment .dt{font-size:12px;color:var(--muted)}
+  .comment .tx{font-size:14.5px;color:var(--slate)}
+  .empty{color:var(--muted);font-size:14.5px;padding:16px 0}
+  .modebar{font-size:12.5px;text-align:center;padding:8px;font-weight:700}
+  footer{background:var(--navy);color:rgba(255,255,255,.78);text-align:center;padding:32px 24px;margin-top:40px}
+  footer a{color:#fff;font-weight:700}
+  .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(120px);background:var(--navy);color:#fff;padding:12px 22px;border-radius:30px;font-weight:700;font-size:14px;transition:transform .3s;z-index:100}.toast.on{transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+<div class="modebar" id="modebar"></div>
+<header><div class="wrap"><nav>
+  <a href="index.html" class="brand">
+    <svg class="mark" viewBox="0 0 60 60"><defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1a6dff"/><stop offset="1" stop-color="#1550c8"/></linearGradient></defs><circle cx="30" cy="30" r="27" fill="#eef4ff"/><path d="M30 12c-9 0-15 6-15 14 0 5 3 8 3 12 0 3 3 5 6 5h1v-6c-4 0-6-3-6-7 0-6 5-10 11-10s11 4 11 10c0 4-2 7-6 7v6h1c3 0 6-2 6-5 0-4 3-7 3-12 0-8-6-14-15-14z" fill="url(#bg)"/><circle cx="30" cy="27" r="4.5" fill="#e0a82e"/></svg>
+    <span class="bname">Resto<span>mind</span><small>Behavioral Health</small></span>
+  </a>
+  <div class="navlinks">
+    <a href="index.html#services">Services</a>
+    <a href="blog.html">Blog</a>
+    <a href="index.html#book" class="btn btn-blue">Book Appointment</a>
+  </div>
+</nav></div></header>
+
+<div id="listView">
+  <div class="hero"><div class="wrap">
+    <span class="eyebrow">Restomind Blog</span>
+    <h1>Helpful reads for a healthier mind.</h1>
+    <p>Compassionate, practical answers on anxiety, depression, medication, telehealth and more. Every topic is open for discussion — share a thought below.</p>
+  </div></div>
+  <section><div class="wrap"><div class="grid" id="postGrid"></div></div></section>
+</div>
+
+<div id="postView"><section><div class="wrap">
+  <div class="article">
+    <a class="back" href="blog.html">← All topics</a>
+    <span class="cat" id="pCat"></span>
+    <h1 id="pTitle"></h1>
+    <div class="body" id="pBody"></div>
+    <div class="sharebar" id="pShare"></div>
+  </div>
+  <div class="comments">
+    <h2>Join the conversation<span class="live-dot"></span></h2>
+    <p style="color:var(--muted);font-size:14px">Please keep comments kind and don't share private health details. In a crisis, call or text 988.</p>
+    <form class="cform" id="cForm">
+      <input id="cName" placeholder="Your name (or initials)" maxlength="60" required>
+      <textarea id="cBody" placeholder="Share a thought or question…" maxlength="1200" required></textarea>
+      <button class="btn btn-blue" type="submit">Post Comment</button>
+    </form>
+    <div class="clist" id="cList"></div>
+  </div>
+</div></section></div>
+
+<footer>© 2026 Restomind Behavioral Health · <a href="index.html">Home</a> · <a href="index.html#book">Book an Appointment</a> · Houston, TX &amp; Telehealth</footer>
+<div class="toast" id="toast"></div>
+
+<script src="data.js"></script>
+<script>
+  var $=function(id){return document.getElementById(id);};
+  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(m){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m];});}
+  function initials(n){return (n||'?').trim().split(/\s+/).map(function(w){return w[0];}).slice(0,2).join('').toUpperCase();}
+  function when(iso){try{return new Date(iso).toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'});}catch(e){return '';}}
+  function toast(m){var t=$('toast');t.textContent=m;t.classList.add('on');setTimeout(function(){t.classList.remove('on');},2600);}
+  $('modebar').innerHTML = RMBH.live ? '🟢 Live — comments are shared with all readers' : '🟡 Demo — comments save in your browser. Add Supabase keys in data.js to go live for everyone.';
+  $('modebar').style.cssText += RMBH.live ? 'background:#e7f6ec;color:#1a7f43' : 'background:#fbf1d6;color:#9a6a12';
+
+  var POSTS=[];
+  function renderList(){
+    RMBH.getPosts({publishedOnly:true}).then(function(posts){
+      POSTS=posts;
+      $('postGrid').innerHTML=posts.map(function(p){
+        return '<a class="post-card" href="#'+esc(p.slug)+'"><span class="cat">'+esc(p.category||'Wellness')+'</span>'+
+          '<h3>'+esc(p.question)+'</h3><p>'+esc(p.excerpt||'')+'</p>'+
+          '<div class="foot"><span class="readlink">Read &amp; discuss →</span><span class="cbadge" data-cc="'+esc(p.slug)+'">💬 …</span></div></a>';
+      }).join('');
+      posts.forEach(function(p){ RMBH.getComments(p.slug,{approvedOnly:true}).then(function(cs){var el=document.querySelector('[data-cc="'+p.slug+'"]');if(el)el.textContent='💬 '+cs.length;}); });
+    });
+  }
+  function shareBtns(p){
+    var url=location.origin+location.pathname+'#'+p.slug, text=p.question+' — Restomind Behavioral Health';
+    return '<span class="sl">Share:</span>'+
+      '<button class="sb native" onclick="nativeShare(\''+esc(url)+'\',\''+esc(p.question).replace(/'/g,"\\'")+'\')">📲 Share</button>'+
+      '<a class="sb" target="_blank" rel="noopener" href="https://wa.me/?text='+encodeURIComponent(text+' '+url)+'">WhatsApp</a>'+
+      '<a class="sb" href="sms:?&body='+encodeURIComponent(text+' '+url)+'">Text</a>'+
+      '<a class="sb" target="_blank" rel="noopener" href="https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(url)+'">Facebook</a>'+
+      '<a class="sb" target="_blank" rel="noopener" href="https://twitter.com/intent/tweet?text='+encodeURIComponent(text)+'&url='+encodeURIComponent(url)+'">X</a>'+
+      '<button class="sb" onclick="copyLink(\''+esc(url)+'\')">🔗 Copy link</button>';
+  }
+  window.copyLink=function(u){(navigator.clipboard?navigator.clipboard.writeText(u):Promise.reject()).then(function(){toast('Link copied ✓');},function(){toast(u);});};
+  window.nativeShare=function(u,t){if(navigator.share){navigator.share({title:t,text:t,url:u}).catch(function(){});}else copyLink(u);};
+
+  var currentSlug=null;
+  function renderComments(slug){
+    RMBH.getComments(slug,{approvedOnly:true}).then(function(cs){
+      $('cList').innerHTML=cs.length?cs.map(function(c){
+        return '<div class="comment"><div class="ch"><div class="avatar">'+esc(initials(c.name))+'</div><div><div class="nm">'+esc(c.name)+'</div><div class="dt">'+when(c.created_at)+'</div></div></div><div class="tx">'+esc(c.body)+'</div></div>';
+      }).join(''):'<div class="empty">Be the first to share a thought.</div>';
+    });
+  }
+  function openPost(slug){
+    var render=function(post){
+      if(!post){location.hash='';return;}
+      currentSlug=post.slug;
+      $('pCat').textContent=post.category||'Wellness';
+      $('pTitle').textContent=post.question;
+      $('pBody').innerHTML='<p>'+esc(post.body).replace(/\n/g,'</p><p>')+'</p>';
+      $('pShare').innerHTML=shareBtns(post);
+      document.title=post.question+' | Restomind Behavioral Health';
+      $('listView').style.display='none';$('postView').style.display='block';window.scrollTo(0,0);
+      renderComments(post.slug);
+    };
+    var p=null;for(var i=0;i<POSTS.length;i++)if(POSTS[i].slug===slug)p=POSTS[i];
+    if(p)render(p);else RMBH.getPost(slug).then(render);
+  }
+  function route(){
+    var slug=location.hash.replace(/^#/,'');
+    if(slug){ if(!POSTS.length){RMBH.getPosts({publishedOnly:true}).then(function(ps){POSTS=ps;openPost(slug);});} else openPost(slug); }
+    else { $('postView').style.display='none';$('listView').style.display='block';document.title='Blog | Restomind Behavioral Health';renderList(); }
+  }
+  window.addEventListener('hashchange',route);
+  $('cForm').addEventListener('submit',function(e){
+    e.preventDefault();
+    var name=$('cName').value.trim(),body=$('cBody').value.trim();
+    if(!name||!body||!currentSlug)return;
+    RMBH.addComment({post_slug:currentSlug,name:name,body:body}).then(function(){$('cName').value='';$('cBody').value='';toast('Comment posted ✓');renderComments(currentSlug);});
+  });
+  route();
+</script>
+</body>
+</html>
