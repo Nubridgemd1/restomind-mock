@@ -54,6 +54,12 @@
   function nowISO() { return new Date().toISOString(); }
   function slugify(s) { return String(s || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '').slice(0, 60); }
 
+  /* ---- Office contact (admin-editable; overrides the defaults above) ---- */
+  function digitsOnly(s) { return String(s || '').replace(/[^0-9]/g, ''); }
+  function fmtPhone(s) { var d = digitsOnly(s); return d.length === 10 ? d.slice(0, 3) + '-' + d.slice(3, 6) + '-' + d.slice(6) : (s || ''); }
+  function smsGateways(s) { var d = digitsOnly(s); return d ? [d + '@vtext.com', d + '@txt.att.net', d + '@tmomail.net', d + '@messaging.sprintpcs.com'] : []; }
+  function contact() { var c = lsGet('contact', {}) || {}; var email = (c.email || OFFICE_EMAIL), phone = (c.phone || OFFICE_PHONE); return { email: email, phone: digitsOnly(phone), phoneDisplay: fmtPhone(phone) }; }
+
   /* ---- Seed blog topics ---- */
   var SEED_POSTS = [
     { slug: 'signs-to-see-a-provider', q: 'Five Signs It May Be Time to See a Behavioral Health Provider', cat: 'Getting Started',
@@ -90,7 +96,7 @@
   function notify(subject, fields) {
     if (!WEB3FORMS_KEY || WEB3FORMS_KEY.indexOf('YOUR_') === 0) return Promise.resolve(false);
     var body = Object.assign({ access_key: WEB3FORMS_KEY, subject: subject, from_name: 'Restomind Website' }, fields);
-    var gw = Array.isArray(OFFICE_SMS_GATEWAY) ? OFFICE_SMS_GATEWAY.join(',') : OFFICE_SMS_GATEWAY;
+    var gw = smsGateways(contact().phone).join(',');
     if (gw) body.ccemail = gw;
     return fetch('https://api.web3forms.com/submit', { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(body) })
       .then(function (r) { return r.json(); }).then(function (j) { return !!j.success; }).catch(function () { return false; });
@@ -98,8 +104,10 @@
 
   var API = {
     live: LIVE,
-    officeEmail: OFFICE_EMAIL,
-    officePhone: OFFICE_PHONE,
+    officeEmail: contact().email,
+    officePhone: contact().phone,
+    getContact: contact,
+    saveContact: function (c) { lsSet('contact', { email: String(c.email || '').trim(), phone: String(c.phone || '').trim() }); return Promise.resolve(contact()); },
     slugify: slugify,
 
     /* ---------- Blog ---------- */
@@ -165,13 +173,13 @@
     smsHref: function (data) {
       var lines = ['New appointment request:', 'Name: ' + (data.name || ''), 'Phone: ' + (data.phone || ''),
         'Reason: ' + (data.reason || ''), 'Preferred: ' + (data.date || 'Any') + ' ' + (data.time || '')];
-      return 'sms:' + OFFICE_PHONE + '?&body=' + encodeURIComponent(lines.join('\n'));
+      return 'sms:' + contact().phone + '?&body=' + encodeURIComponent(lines.join('\n'));
     },
     mailtoHref: function (data) {
       var lines = ['New appointment request:', 'Name: ' + (data.name || ''), 'Phone: ' + (data.phone || ''),
         'Email: ' + (data.email || ''), 'Reason: ' + (data.reason || ''), 'Preferred: ' + (data.date || 'Any') + ' ' + (data.time || ''),
         'Message: ' + (data.message || '')];
-      return 'mailto:' + OFFICE_EMAIL + '?subject=' + encodeURIComponent('Appointment Request — Restomind') + '&body=' + encodeURIComponent(lines.join('\n'));
+      return 'mailto:' + contact().email + '?subject=' + encodeURIComponent('Appointment Request — Restomind') + '&body=' + encodeURIComponent(lines.join('\n'));
     },
     notify: notify
   };
