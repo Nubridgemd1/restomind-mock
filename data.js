@@ -18,8 +18,8 @@
  * paste the Project URL + anon public key here.
  * ==========================================================================*/
 (function () {
-  var SUPABASE_URL = '';
-  var SUPABASE_ANON_KEY = '';
+  var SUPABASE_URL = 'https://hqinuagpbsdegfmeoqbs.supabase.co';
+  var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhxaW51YWdwYnNkZWdmbWVvcWJzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODcwOTU4NzAsImV4cCI6MjEwMjY3MTg3MH0._hvApS_AHl2wqA8Y5QtNJHJG_JaEetkhR7kKGXCq3oI';
   var WEB3FORMS_KEY = 'YOUR_WEB3FORMS_ACCESS_KEY';
   var OFFICE_EMAIL = 'pauline@restomindwellness.com';
   var OFFICE_PHONE = '3467153734';

@@ -9,6 +9,7 @@
 <style>
   :root{--blue:#1b3f75;--blue-deep:#12315c;--navy:#0f2350;--gold:#2f8f5b;--gold-deep:#237a48;--gold-soft:#e4f4ea;--bg:#f4f8ff;--white:#fff;--ink:#14213d;--slate:#4a5878;--muted:#8a95af;--line:#e2e9f6;--disp:'Poppins',sans-serif;--sans:'Mulish',-apple-system,Segoe UI,Arial,sans-serif;--ok:#1a7f43;--ok-soft:#e7f6ec}
   *{margin:0;padding:0;box-sizing:border-box}
+  html,body{overflow-x:hidden;max-width:100%}
   body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.55}
   h1,h2,h3,.disp{font-family:var(--disp)}
   .top{background:var(--navy);color:#fff}
@@ -69,7 +70,8 @@
   .fl-hl{font-family:var(--disp);font-size:30px;font-weight:800;line-height:1.1;margin-bottom:10px}
   .fl-sub{font-size:15px;opacity:.94;line-height:1.5}
   .fl-body{padding:24px 34px 30px}
-  .fl-cta{background:var(--gold-soft);border:1px solid var(--gold);border-radius:12px;padding:14px;text-align:center}
+  .fl-cta{background:var(--gold-soft);border:1px solid var(--gold);border-radius:12px;padding:14px;display:flex;align-items:center;gap:14px;text-align:left}
+  .fl-cta .fl-qr{width:80px;height:80px;flex:none;background:#fff;border-radius:9px;padding:5px}
   .fl-cta b{color:var(--gold-deep);font-family:var(--disp)}.fl-cta .ph{color:var(--navy);font-weight:800;margin-top:4px}
   @media print{body *{visibility:hidden}.flyer,.flyer *{visibility:visible}.flyer{position:absolute;inset:0;width:100%;border-radius:0}.viewer{background:#fff;position:static}.viewer .close{display:none}}
 </style>
@@ -250,7 +252,7 @@
   window.resetKit=function(){if(confirm('Reset all flyers to defaults?'))RMBH.resetKit().then(function(){loadKit();toast('Reset');});};
   window.openFlyer=function(i){collect();var k=KIT[i];
     $('flyerInner').innerHTML='<div class="fl-top '+k.theme+'"><div class="fl-brand">Restomind<small>BEHAVIORAL HEALTH</small></div><span class="fl-tag">'+esc(k.tag)+'</span><div class="fl-hl">'+esc(k.headline)+'</div><div class="fl-sub">'+esc(k.sub)+'</div></div>'+
-      '<div class="fl-body"><div style="font-size:14px;color:#4a5878;margin-bottom:14px"><b style="color:#0f2350">'+esc(k.title)+'</b></div><div class="fl-cta"><b>Book your appointment today</b><div class="ph">📞 346-715-3734 · pauline@restomindwellness.com</div><div style="font-size:12px;color:#8a95af;margin-top:4px">restomindwellness.com · Houston, TX &amp; Telehealth</div></div></div>';
+      '<div class="fl-body"><div style="font-size:14px;color:#4a5878;margin-bottom:14px"><b style="color:#0f2350">'+esc(k.title)+'</b></div><div class="fl-cta"><img class="fl-qr" src="assets/site-qr.png" alt="Scan to book"><div><b>Book your appointment today</b><div class="ph">📞 346-715-3734</div><div style="font-size:13px;color:#0f2350;font-weight:700">pauline@restomindwellness.com</div><div style="font-size:12px;color:#8a95af;margin-top:4px">📱 Scan the code · restomindwellness.com · Houston, TX &amp; Telehealth</div></div></div></div>';
     $('viewer').classList.add('on');
   };
   window.closeViewer=function(){$('viewer').classList.remove('on');};
