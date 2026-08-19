@@ -20,7 +20,7 @@
 (function () {
   var SUPABASE_URL = 'https://hqinuagpbsdegfmeoqbs.supabase.co';
   var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhxaW51YWdwYnNkZWdmbWVvcWJzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODcwOTU4NzAsImV4cCI6MjEwMjY3MTg3MH0._hvApS_AHl2wqA8Y5QtNJHJG_JaEetkhR7kKGXCq3oI';
-  var WEB3FORMS_KEY = 'YOUR_WEB3FORMS_ACCESS_KEY';
+  var WEB3FORMS_KEY = '0849be2a-d79c-4f8a-806f-90bd3a911db8';
   var OFFICE_EMAIL = 'pauline@restomindwellness.com';
   var OFFICE_PHONE = '3467153734';
   // Fully-automatic text to the office. A static page can't send SMS directly, so the
