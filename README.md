@@ -1,6 +1,6 @@
 # Restomind Behavioral Health — website mock
 
-Static mock for **restomindbehavioralhealth.com** — bright blue + gold theme, psychiatry & therapy for adults (Houston, TX & telehealth). Contact: **713-384-4384**, **pauline11246@yahoo.com**.
+Static mock for **restomindwellness.com** — bright blue + gold theme, psychiatry & therapy for adults (Houston, TX & telehealth). Contact: **346-715-3734**, **pauline@restomindwellness.com**.
 
 **Shareable links (GitHub Pages):** the **main site** is the repo root; the **admin** is `admin.html`.
 
@@ -15,12 +15,12 @@ Static mock for **restomindbehavioralhealth.com** — bright blue + gold theme, 
 Admin passcode (demo): **`restomind2026`** — change `PASSCODE` in `admin.html` before real use.
 
 ## Book an Appointment → reports to the office
-The booking box **instantly emails the request to `pauline11246@yahoo.com`** and offers a **one-tap text to 713-384-4384**.
+The booking box **instantly emails the request to `pauline@restomindwellness.com`** and offers a **one-tap text to 346-715-3734**.
 
-- **Email (automatic):** get a free key at [web3forms.com](https://web3forms.com) registered to `pauline11246@yahoo.com`, then set `WEB3FORMS_KEY` in `data.js`. Until then, the form shows one-click **Email** / **Text** buttons as a fallback.
+- **Email (automatic):** get a free key at [web3forms.com](https://web3forms.com) registered to `pauline@restomindwellness.com`, then set `WEB3FORMS_KEY` in `data.js`. Until then, the form shows one-click **Email** / **Text** buttons as a fallback.
 - **Text (automatic):** a static page can't send SMS on its own. Two options:
-  1. **One-tap:** after submitting, the patient taps **"Also text us these details"** → their phone texts 713-384-4384 with the details prefilled.
-  2. **Fully automatic:** set `OFFICE_SMS_GATEWAY` in `data.js` to the number's carrier email-to-SMS address (e.g. `7133844384@vtext.com` for Verizon, `@txt.att.net` AT&T, `@tmomail.net` T-Mobile) — the booking email is then also CC'd to that gateway, delivering a text. (For a robust solution, wire Twilio via a small serverless function.)
+  1. **One-tap:** after submitting, the patient taps **"Also text us these details"** → their phone texts 346-715-3734 with the details prefilled.
+  2. **Fully automatic:** set `OFFICE_SMS_GATEWAY` in `data.js` to the number's carrier email-to-SMS address (e.g. `3467153734@vtext.com` for Verizon, `@txt.att.net` AT&T, `@tmomail.net` T-Mobile) — the booking email is then also CC'd to that gateway, delivering a text. (For a robust solution, wire Twilio via a small serverless function.)
 
 ## Live blog + comments (Supabase, free)
 Without keys, blog topics/comments work in each browser (demo). To make them **live and shared for everyone**, add a free Supabase project:

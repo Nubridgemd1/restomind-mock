@@ -87,7 +87,7 @@
   <button class="tab on" data-t="blog">✍️ Blog Topics</button>
   <button class="tab" data-t="comments">💬 Comments</button>
   <button class="tab" data-t="kit">📢 Marketing Kit</button>
-  <button class="tab" data-t="contact">📇 Contact</button>
+  <button class="tab" data-t="contact">⚙️ Settings</button>
 </div>
 
 <main>
@@ -138,11 +138,23 @@
       <div class="sub">Update the email and phone patients see across the website, the “Book an Appointment” form and the one-tap text. Changes apply instantly.</div>
       <div class="fgrid" style="margin-top:14px">
         <div class="fld"><label>Booking email</label><input id="ctEmail" type="email" placeholder="office@example.com"></div>
-        <div class="fld"><label>Phone (call &amp; text)</label><input id="ctPhone" placeholder="713-384-4384"></div>
+        <div class="fld"><label>Phone (call &amp; text)</label><input id="ctPhone" placeholder="346-715-3734"></div>
       </div>
       <div class="row-actions"><button type="button" class="btn btn-blue" onclick="saveContact()">Save contact</button><span id="ctMsg" class="sub" style="align-self:center;color:var(--ok)"></span></div>
       <div class="sub" style="margin-top:12px;padding-top:12px;border-top:1px solid var(--line)">Currently live on the site: <b id="ctCur" style="color:var(--navy)"></b></div>
       <div class="sub" style="margin-top:6px">Used by: website header &amp; footer · contact section · Call/Text buttons · booking email &amp; text.</div>
+    </div>
+    <div class="card">
+      <h2>Admin Passcode</h2>
+      <div class="sub">Change the passcode used to sign in to this admin console.</div>
+      <div class="fgrid" style="margin-top:14px">
+        <div class="fld"><label>Current passcode</label><input id="pcCur" type="password" placeholder="current passcode" autocomplete="off"></div>
+        <div class="fld"></div>
+        <div class="fld"><label>New passcode</label><input id="pcNew" type="password" placeholder="new passcode" autocomplete="new-password"></div>
+        <div class="fld"><label>Confirm new passcode</label><input id="pcNew2" type="password" placeholder="repeat new passcode" autocomplete="new-password"></div>
+      </div>
+      <div class="row-actions"><button type="button" class="btn btn-blue" onclick="savePass()">Update passcode</button><span id="pcMsg" class="sub" style="align-self:center;color:var(--ok)"></span></div>
+      <div class="sub" style="margin-top:12px;padding-top:12px;border-top:1px solid var(--line)">Applies to sign-in in this browser (demo). For shared login across devices/staff, connect a backend — see the Supabase note.</div>
     </div>
   </section>
 </main>
@@ -154,7 +166,7 @@
 
 <script src="data.js"></script>
 <script>
-  var PASSCODE='restomind2026';
+  function getPass(){try{return localStorage.getItem('rmbh_pass')||'restomind2026';}catch(e){return 'restomind2026';}}
   var $=function(id){return document.getElementById(id);};
   function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(m){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m];});}
   function when(iso){try{return new Date(iso).toLocaleString(undefined,{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'});}catch(e){return '';}}
@@ -162,7 +174,13 @@
   function toast(m){var t=$('toast');t.textContent=m;t.classList.add('on');setTimeout(function(){t.classList.remove('on');},2400);}
 
   if(sessionStorage.getItem('rmbh_admin')==='1'){$('gate').style.display='none';boot();}
-  function unlock(){if($('pass').value===PASSCODE){sessionStorage.setItem('rmbh_admin','1');$('gate').style.display='none';boot();}else toast('Incorrect passcode');}
+  function unlock(){if($('pass').value===getPass()){sessionStorage.setItem('rmbh_admin','1');$('gate').style.display='none';boot();}else toast('Incorrect passcode');}
+  window.savePass=function(){ var cur=$('pcCur').value, nw=$('pcNew').value.trim(), nw2=$('pcNew2').value.trim();
+    if(cur!==getPass()){toast('Current passcode is incorrect');return;}
+    if(nw.length<4){toast('New passcode must be at least 4 characters');return;}
+    if(nw!==nw2){toast('New passcodes do not match');return;}
+    try{localStorage.setItem('rmbh_pass',nw);}catch(e){}
+    $('pcCur').value=$('pcNew').value=$('pcNew2').value=''; $('pcMsg').textContent='✓ Passcode updated.'; toast('Passcode updated'); };
   function lock(){sessionStorage.removeItem('rmbh_admin');location.reload();}
 
   document.querySelectorAll('.tab').forEach(function(t){t.onclick=function(){
@@ -219,9 +237,9 @@
   var KIT=[];
   function loadKit(){RMBH.getKit().then(function(kit){KIT=kit;
     $('kitGrid').innerHTML=kit.map(function(k,i){
-      return '<div class="kitcard"><span class="type '+k.theme+'">'+k.theme+'</span><h3>📄 '+esc(k.title)+'</h3>'+
+      return '<div class="kitcard"><span class="type '+k.theme+'">'+(k.theme==='gold'?'green':k.theme)+'</span><h3>📄 '+esc(k.title)+'</h3>'+
         kf(i,'title','Title')+kf(i,'tag','Tag / label')+kf(i,'headline','Headline',1)+kf(i,'sub','Sub-text',1)+
-        '<div class="kfld"><label>Theme</label><select data-i="'+i+'" data-f="theme"><option value="blue"'+(k.theme==='blue'?' selected':'')+'>Blue</option><option value="gold"'+(k.theme==='gold'?' selected':'')+'>Gold</option></select></div>'+
+        '<div class="kfld"><label>Theme</label><select data-i="'+i+'" data-f="theme"><option value="blue"'+(k.theme==='blue'?' selected':'')+'>Blue</option><option value="gold"'+(k.theme==='gold'?' selected':'')+'>Green</option></select></div>'+
         '<div class="row-actions"><button class="btn btn-blue" onclick="saveOne('+i+')">Save</button><button class="btn btn-gold" onclick="openFlyer('+i+')">Open / Print</button></div></div>';
     }).join('');
   });}
@@ -232,7 +250,7 @@
   window.resetKit=function(){if(confirm('Reset all flyers to defaults?'))RMBH.resetKit().then(function(){loadKit();toast('Reset');});};
   window.openFlyer=function(i){collect();var k=KIT[i];
     $('flyerInner').innerHTML='<div class="fl-top '+k.theme+'"><div class="fl-brand">Restomind<small>BEHAVIORAL HEALTH</small></div><span class="fl-tag">'+esc(k.tag)+'</span><div class="fl-hl">'+esc(k.headline)+'</div><div class="fl-sub">'+esc(k.sub)+'</div></div>'+
-      '<div class="fl-body"><div style="font-size:14px;color:#4a5878;margin-bottom:14px"><b style="color:#0f2350">'+esc(k.title)+'</b></div><div class="fl-cta"><b>Book your appointment today</b><div class="ph">📞 713-384-4384 · pauline11246@yahoo.com</div><div style="font-size:12px;color:#8a95af;margin-top:4px">restomindbehavioralhealth.com · Houston, TX &amp; Telehealth</div></div></div>';
+      '<div class="fl-body"><div style="font-size:14px;color:#4a5878;margin-bottom:14px"><b style="color:#0f2350">'+esc(k.title)+'</b></div><div class="fl-cta"><b>Book your appointment today</b><div class="ph">📞 346-715-3734 · pauline@restomindwellness.com</div><div style="font-size:12px;color:#8a95af;margin-top:4px">restomindwellness.com · Houston, TX &amp; Telehealth</div></div></div>';
     $('viewer').classList.add('on');
   };
   window.closeViewer=function(){$('viewer').classList.remove('on');};

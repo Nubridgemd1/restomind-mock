@@ -10,8 +10,8 @@
  * DEMO mode : if blank, everything works in THIS browser via localStorage.
  *
  * Booking + new comments email the office in real time via Web3Forms. Get a free
- * key at web3forms.com registered to pauline11246@yahoo.com, then paste it below.
- * The booking also offers a one-tap text to the office (713-384-4384); set
+ * key at web3forms.com registered to pauline@restomindwellness.com, then paste it below.
+ * The booking also offers a one-tap text to the office (346-715-3734); set
  * OFFICE_SMS_GATEWAY to a carrier email-to-SMS address for fully-automatic texts.
  *
  * Supabase setup (free, ~3 min): create a project, run the SQL in README.md, and
@@ -21,19 +21,19 @@
   var SUPABASE_URL = '';
   var SUPABASE_ANON_KEY = '';
   var WEB3FORMS_KEY = 'YOUR_WEB3FORMS_ACCESS_KEY';
-  var OFFICE_EMAIL = 'pauline11246@yahoo.com';
-  var OFFICE_PHONE = '7133844384';
+  var OFFICE_EMAIL = 'pauline@restomindwellness.com';
+  var OFFICE_PHONE = '3467153734';
   // Fully-automatic text to the office. A static page can't send SMS directly, so the
   // booking email is ALSO CC'd to the number's carrier email-to-SMS gateway, which turns
   // it into a text. Carrier unknown, so this is a CATCH-ALL across the major US carriers —
-  // only the one that actually owns 713-384-4384 delivers; the rest quietly drop.
+  // only the one that actually owns 346-715-3734 delivers; the rest quietly drop.
   // (Once you confirm the real carrier, trim this to just that one line to avoid stray bounces.)
   // NOTE: this only fires once WEB3FORMS_KEY is set — the text rides on the booking email.
   var OFFICE_SMS_GATEWAY = [
-    '7133844384@vtext.com',              // Verizon
-    '7133844384@txt.att.net',            // AT&T
-    '7133844384@tmomail.net',            // T-Mobile
-    '7133844384@messaging.sprintpcs.com' // Sprint / legacy T-Mobile
+    '3467153734@vtext.com',              // Verizon
+    '3467153734@txt.att.net',            // AT&T
+    '3467153734@tmomail.net',            // T-Mobile
+    '3467153734@messaging.sprintpcs.com' // Sprint / legacy T-Mobile
   ];
 
   var LIVE = !!(SUPABASE_URL && SUPABASE_ANON_KEY);
@@ -77,6 +77,21 @@
     { slug: 'supporting-a-loved-one', q: 'Supporting a Loved One Through Depression', cat: 'For Families',
       excerpt: 'You do not need perfect words to make a difference. Here are gentle, practical ways to help — and to care for yourself too.',
       body: 'When someone you love is struggling, your care matters more than you know. Listen more than you fix, and let them share without rushing to solve. Simple words like I am here and I am glad you told me can mean everything. Gently encourage professional support, and offer to help make the call or arrange a ride. Learn the signs that need urgent help, and if your loved one expresses hopelessness or thoughts of self harm, act right away by calling or texting 988. Finally, take care of yourself too, because you cannot pour from an empty cup. Restomind partners with families every step of the way.' },
+    { slug: 'sleep-and-mental-health', q: 'Sleep and Mental Health: Why Rest Matters', cat: 'Wellness',
+      excerpt: 'Sleep and mental health move together. Here is why rest matters and simple ways to protect it.',
+      body: 'Sleep and mental health are deeply connected, and each one shapes the other. Poor sleep can worsen anxiety, low mood, focus and irritability, while stress and depression can make it harder to fall or stay asleep. The good news is that better sleep is one of the most powerful and accessible ways to support your mind. Aim for a consistent sleep and wake time, wind down away from screens, keep your room cool and dark, and limit caffeine and alcohol late in the day. If sleep problems last more than a few weeks or come with low mood or worry, it is worth talking to a provider. At Restomind, we treat sleep as part of whole-person care and help you find what works. If you are in crisis, call or text 988 right away.' },
+    { slug: 'managing-adhd-adults', q: 'Managing ADHD as an Adult: Practical Strategies', cat: 'ADHD',
+      excerpt: 'Adult ADHD is common and very treatable. Here are practical strategies and when to seek support.',
+      body: 'Adult ADHD is common, often overlooked, and very treatable. It can show up as trouble focusing, restlessness, forgetfulness, procrastination, or feeling easily overwhelmed, and it is not a matter of willpower or trying harder. Practical strategies can make a real difference: break tasks into small steps, use timers and reminders, keep a single calendar, reduce distractions, and build routines that protect your energy. For many people, medication together with coaching or therapy works best. A thorough evaluation helps you understand how your mind works and build a plan that fits your life. If you have wondered whether ADHD might explain some of your struggles, reaching out is a strong first step.' },
+    { slug: 'coping-with-depression', q: 'Small Steps That Help With Depression', cat: 'Depression',
+      excerpt: 'When everything feels heavy, small steps count. Here are gentle, realistic ways to move forward.',
+      body: 'When depression settles in, everything can feel heavy, and even small tasks can seem like too much. Be gentle with yourself, and remember that recovery usually happens in small steps rather than one big leap. Try to keep a simple routine, get a few minutes of daylight, move your body a little, and stay connected to one or two supportive people. Set tiny, doable goals and let them count, and try not to judge yourself for hard days. Depression is a real medical condition, not a weakness, and effective treatment is available. If low mood lasts more than a couple of weeks or gets in the way of daily life, talk to a provider. If you have any thoughts of hopelessness or self harm, call or text 988 right away.' },
+    { slug: 'your-first-visit', q: 'Your First Visit: What to Expect at Restomind', cat: 'Getting Started',
+      excerpt: 'Nervous about a first appointment? Here is exactly what happens and how to prepare.',
+      body: 'Feeling nervous before a first appointment is completely normal, and knowing what to expect can help. Your first visit at Restomind is a caring, judgment-free conversation. Your provider will ask about what brought you in, your history, your goals, and what a good outcome would look like for you. There are no wrong answers, and you are always in control of what you share. Together you will begin to understand what is going on and talk through options, which may include therapy, medication, lifestyle support, or a combination. It helps to jot down your questions and any medications beforehand, and to find a private, comfortable space if you are meeting by telehealth. You are taking a brave, worthwhile step, and you will not be doing it alone.' },
+    { slug: 'calming-stress-techniques', q: 'Five Everyday Techniques to Calm Stress', cat: 'Stress',
+      excerpt: 'You can lower stress with a few simple, science-backed habits. Here are five to try today.',
+      body: 'Stress is a normal part of life, but a few simple habits can help keep it from taking over. First, slow your breathing: in for four counts, out for six, repeated for a minute to calm your nervous system. Second, move your body, even a short walk helps release tension. Third, name what you are feeling, because putting stress into words makes it more manageable. Fourth, protect your basics, sleep, meals, and a little downtime, which are your foundation. Fifth, connect with someone you trust rather than carrying it alone. If stress feels constant, hard to control, or starts to affect your sleep, work, or relationships, it may be time to talk to a provider. Support is available, and small changes add up.' },
   ];
   function seedPosts() {
     return SEED_POSTS.map(function (p, i) {
@@ -90,7 +105,12 @@
     { id: 'flyer2', theme: 'gold', tag: 'Our Services', title: 'Care for the whole you', headline: 'Evaluations, medication management and therapy', sub: 'Support for anxiety, depression, trauma, ADHD, bipolar and more, tailored to your goals.' },
     { id: 'flyer3', theme: 'blue', tag: 'Now Accepting New Patients', title: 'You do not have to wait to feel better', headline: 'Same-week appointments when available', sub: 'Warm, judgment free care. Book online, call, or text us today.' },
     { id: 'flyer4', theme: 'gold', tag: 'Telehealth', title: 'Care that comes to you', headline: 'Secure virtual visits from home', sub: 'Confidential, convenient behavioral health care wherever you are in Texas.' },
-    { id: 'flyer5', theme: 'blue', tag: 'Book Today', title: 'Take the first step', headline: 'A caring team is ready to listen', sub: 'Call or text 713-384-4384, or request an appointment online.' },
+    { id: 'flyer5', theme: 'blue', tag: 'Book Today', title: 'Take the first step', headline: 'A caring team is ready to listen', sub: 'Call or text 346-715-3734, or request an appointment online.' },
+    { id: 'flyer6', theme: 'blue', tag: 'Anxiety Support', title: 'Find calm again', headline: 'Relief from anxiety is possible', sub: 'Evidence-based care for worry, panic and racing thoughts, at your pace, with a team that truly listens.' },
+    { id: 'flyer7', theme: 'gold', tag: 'Depression Care', title: 'You are not alone', headline: 'Small steps forward, together', sub: 'Compassionate, effective treatment for depression. Most people feel real relief with the right support.' },
+    { id: 'flyer8', theme: 'blue', tag: 'ADHD & Focus', title: 'Focus, clarity, follow-through', headline: 'Adult ADHD evaluation and care', sub: 'Understand how your mind works and build practical strategies, with medication support when it helps.' },
+    { id: 'flyer9', theme: 'gold', tag: 'For Families', title: 'Support for the whole family', headline: 'Care that includes the people you love', sub: 'We partner with families through guidance, education and a clear plan. In a crisis, call or text 988.' },
+    { id: 'flyer10', theme: 'blue', tag: 'Your First Visit', title: 'A caring first step', headline: 'What to expect at your first visit', sub: 'A warm, judgment-free conversation to understand what is going on and what can help. New patients welcome.' },
   ];
 
   function notify(subject, fields) {
@@ -165,7 +185,7 @@
 
     /* ---------- Booking ---------- */
     submitBooking: function (data) {
-      // Real-time email to the office (pauline11246@yahoo.com) via Web3Forms.
+      // Real-time email to the office (pauline@restomindwellness.com) via Web3Forms.
       var fields = { 'Reason': data.reason, 'Name': data.name, 'Phone': data.phone, 'Email': data.email,
         'Preferred date': data.date || 'Any', 'Preferred time': data.time || 'Any', 'Message': data.message || '' };
       return notify('New Appointment Request — Restomind Behavioral Health', fields);
