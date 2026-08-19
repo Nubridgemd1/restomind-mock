@@ -164,8 +164,9 @@
     },
     getAllComments: function () { if (LIVE) return sb('comments?order=created_at.desc'); return Promise.resolve(lsGet('comments', []).slice().reverse()); },
     addComment: function (c) {
+      var silent = c._silent;
       c = { post_slug: c.post_slug, name: c.name, body: c.body, status: 'approved', created_at: nowISO() };
-      notify('New blog comment — ' + c.post_slug, { 'Comment on': c.post_slug, Name: c.name, Comment: c.body });
+      if (!silent) notify('New blog comment — ' + c.post_slug, { 'Comment on': c.post_slug, Name: c.name, Comment: c.body });
       if (LIVE) return sb('comments', { method: 'POST', headers: { Prefer: 'return=representation' }, body: JSON.stringify(c) });
       var all = lsGet('comments', []); c.id = uid(); all.push(c); lsSet('comments', all); return Promise.resolve(c);
     },

@@ -69,6 +69,9 @@
   .avatar{width:34px;height:34px;border-radius:50%;background:#e7f0ff;color:var(--blue);font-weight:800;display:flex;align-items:center;justify-content:center;font-size:14px}
   .comment .nm{font-weight:800;color:var(--navy);font-size:14.5px}.comment .dt{font-size:12px;color:var(--muted)}
   .comment .tx{font-size:14.5px;color:var(--slate)}
+  .comment.staff{background:#e4f4ea;border-color:#bfe0cd;border-left:4px solid #2f8f5b}
+  .comment .avatar.av-staff{background:#2f8f5b;color:#fff}
+  .comment .staffbadge{font-size:10px;background:#2f8f5b;color:#fff;padding:2px 8px;border-radius:10px;font-weight:800;margin-left:6px;vertical-align:middle}
   .empty{color:var(--muted);font-size:14.5px;padding:16px 0}
   .modebar{font-size:12.5px;text-align:center;padding:8px;font-weight:700}
   footer{background:var(--navy);color:rgba(255,255,255,.78);text-align:center;padding:32px 24px;margin-top:40px}
@@ -161,7 +164,8 @@
   function renderComments(slug){
     RMBH.getComments(slug,{approvedOnly:true}).then(function(cs){
       $('cList').innerHTML=cs.length?cs.map(function(c){
-        return '<div class="comment"><div class="ch"><div class="avatar">'+esc(initials(c.name))+'</div><div><div class="nm">'+esc(c.name)+'</div><div class="dt">'+when(c.created_at)+'</div></div></div><div class="tx">'+esc(c.body)+'</div></div>';
+        var staff=c.name==='Restomind Behavioral Health';
+        return '<div class="comment'+(staff?' staff':'')+'"><div class="ch"><div class="avatar'+(staff?' av-staff':'')+'">'+(staff?'❤':esc(initials(c.name)))+'</div><div><div class="nm">'+esc(c.name)+(staff?' <span class="staffbadge">Staff</span>':'')+'</div><div class="dt">'+when(c.created_at)+'</div></div></div><div class="tx">'+esc(c.body)+'</div></div>';
       }).join(''):'<div class="empty">Be the first to share a thought.</div>';
     });
   }

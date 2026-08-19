@@ -96,6 +96,16 @@
   .chip{background:#fff;border:1px solid var(--line);border-radius:30px;padding:11px 22px;font-size:15px;font-weight:700;color:var(--ink);box-shadow:0 4px 14px rgba(18,49,92,.05)}
   .chip b{color:var(--blue)}
 
+  /* provider profile */
+  .provider-profile{display:grid;grid-template-columns:230px 1fr;gap:32px;align-items:center;text-align:left;background:#fff;border:1px solid var(--line);border-radius:24px;padding:32px;box-shadow:var(--shadow);margin-top:36px}
+  .prov-photo{width:230px;height:270px;object-fit:cover;border-radius:18px;display:block}
+  .prov-mono{width:230px;height:270px;border-radius:18px;background:conic-gradient(from 210deg,var(--blue),var(--gold));display:flex;align-items:center;justify-content:center;color:#fff;font-family:var(--disp);font-size:70px;font-weight:800;letter-spacing:2px}
+  .prov-body h3{font-family:var(--disp);font-size:26px;color:var(--navy);font-weight:800;margin-top:2px}
+  .prov-body .cred{color:var(--gold-deep);font-weight:800;font-size:13.5px;margin:3px 0 12px}
+  .prov-body p{color:var(--slate);font-size:15.5px;margin-bottom:11px}
+  .prov-tags{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 18px}
+  .prov-tags span{background:#eef4ff;color:var(--blue);font-size:12.5px;font-weight:700;padding:6px 13px;border-radius:20px}
+  @media(max-width:720px){.provider-profile{grid-template-columns:1fr;text-align:center;padding:24px;gap:20px}.prov-photo,.prov-mono{width:190px;height:224px;margin:0 auto}.prov-tags{justify-content:center}}
   /* booking */
   .booking{background:radial-gradient(ellipse 70% 90% at 15% 0%,#e7f0ff,transparent 55%),var(--bg)}
   .book-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:40px;align-items:start}
@@ -240,11 +250,27 @@
 
 <!-- ABOUT -->
 <section class="sec" id="about">
-  <div class="wrap" style="max-width:820px;text-align:center">
-    <span class="eyebrow">About Restomind</span>
-    <h2 style="margin-top:6px">Where healing minds find rest</h2>
-    <p style="color:var(--slate);font-size:18px;margin-top:18px">At Restomind Behavioral Health, we believe everyone deserves warm, judgment-free support and expert, evidence-based care. Our mission is to help you understand what you're going through, feel truly heard, and take real steps toward peace of mind — at your pace, with a team by your side.</p>
-    <a href="#book" class="btn btn-gold" style="margin-top:24px">Start Your Care</a>
+  <div class="wrap" style="max-width:980px">
+    <div style="max-width:820px;margin:0 auto;text-align:center">
+      <span class="eyebrow">About Restomind</span>
+      <h2 style="margin-top:6px">Where healing minds find rest</h2>
+      <p style="color:var(--slate);font-size:18px;margin-top:18px">At Restomind Behavioral Health, we believe everyone deserves warm, judgment-free support and expert, evidence-based care. Our mission is to help you understand what you're going through, feel truly heard, and take real steps toward peace of mind — at your pace, with a team by your side.</p>
+    </div>
+    <div class="provider-profile">
+      <div>
+        <img class="prov-photo" src="assets/pauline.jpg" alt="Pauline Iromini, PMHNP-BC — Restomind Behavioral Health" onerror="this.style.display='none';this.parentNode.querySelector('.prov-mono').style.display='flex'">
+        <div class="prov-mono" style="display:none">PI</div>
+      </div>
+      <div class="prov-body">
+        <span class="eyebrow" style="color:var(--gold-deep)">Meet Your Provider</span>
+        <h3>Pauline Iromini, PMHNP-BC</h3>
+        <div class="cred">Board-Certified Psychiatric Mental Health Nurse Practitioner</div>
+        <p>Pauline is a board-certified Psychiatric Mental Health Nurse Practitioner committed to compassionate, evidence-based care. She works with adults navigating anxiety, depression, ADHD and mood disorders, and is passionate about helping each person feel more supported, balanced and understood.</p>
+        <p>Care with Pauline is a partnership — she takes the time to listen, understand your story, and build a plan that fits your goals, whether that means therapy, thoughtful medication management, or both. Outside the office, she loves being near the water, whether that's the beach, a lake, or swimming whenever she can.</p>
+        <div class="prov-tags"><span>Anxiety</span><span>Depression</span><span>ADHD</span><span>Mood Disorders</span><span>Medication Management</span><span>Telehealth</span></div>
+        <a href="#book" class="btn btn-gold">Book with Pauline</a>
+      </div>
+    </div>
   </div>
 </section>
 
