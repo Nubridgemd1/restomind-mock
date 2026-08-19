@@ -1,6 +1,6 @@
 # Restomind Behavioral Health — website mock
 
-Static mock for **restomindwellness.com** — bright blue + gold theme, psychiatry & therapy for adults (Houston, TX & telehealth). Contact: **346-715-3734**, **pauline@restomindwellness.com**.
+Static mock for **restomindwellness.com** — navy blue + green theme, psychiatry & therapy for adults (Houston, TX & telehealth). Contact: **346-715-3734**, **pauline@restomindwellness.com**.
 
 **Shareable links (GitHub Pages):** the **main site** is the repo root; the **admin** is `admin.html`.
 
@@ -12,7 +12,7 @@ Static mock for **restomindwellness.com** — bright blue + gold theme, psychiat
 | `admin.html` | Admin — **add/update blog topics**, **moderate comments**, **Marketing Kit** with editable flyers (print / save as PDF) |
 | `data.js` | Shared data layer (Supabase when configured, else localStorage) |
 
-Admin passcode (demo): **`restomind2026`** — change `PASSCODE` in `admin.html` before real use.
+Admin passcode (demo): **`restomind2026`** — change it anytime in the admin under **⚙️ Settings → Admin Passcode** (saved per browser).
 
 ## Book an Appointment → reports to the office
 The booking box **instantly emails the request to `pauline@restomindwellness.com`** and offers a **one-tap text to 346-715-3734**.
@@ -56,4 +56,4 @@ Marketing-kit flyers are edited in the admin and saved in that browser; they can
 ## Hosting
 Any static host. GitHub Pages: Settings → Pages → deploy from `main` / root.
 
-Theme: bright blue `#1a6dff` + gold `#e0a82e`. Poppins (headings) + Mulish (body).
+Theme: navy blue `#1b3f75` + green `#2f8f5b`. Poppins (headings) + Mulish (body).
